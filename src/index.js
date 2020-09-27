@@ -1,7 +1,6 @@
-module.exports = function toReadable(number) {};
-
 const numOneToThirteen = (num) => {
     const numbers = {
+        zero: 0,
         one: 1,
         two: 2,
         three: 3,
@@ -58,10 +57,12 @@ const hundreds = (num) => {
     const arr = String(num)
             .split("")
             .map((x) => Number(x)),
-        twoLastDig = Number(arr.splice(-2).join(""));
+        twoLastDig = Number(arr.slice(-2).join(""));
+    console.log(arr);
     if (arr[1] === 0 && arr[2] === 0) {
         return `${numOneToThirteen(arr[0])} hundred`;
-    } else if (twoLastDig <= 13) {
+    } else if (twoLastDig <= 13 && twoLastDig !== 0) {
+        console.log("this");
         return `${numOneToThirteen(arr[0])} hundred ${numOneToThirteen(
             twoLastDig
         )}`;
@@ -71,7 +72,7 @@ const hundreds = (num) => {
         )}`;
 };
 
-const toReadable = (number) => {
+module.exports = function toReadable(number) {
     if (number <= 13) {
         return numOneToThirteen(number);
     } else if (number <= 99) {
@@ -80,5 +81,3 @@ const toReadable = (number) => {
         return hundreds(number);
     }
 };
-
-console.log(toReadable(914));
