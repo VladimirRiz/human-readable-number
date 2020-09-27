@@ -36,7 +36,11 @@ const fourteenToNinetyNine = (num) => {
         ninety: 9,
     };
     const arr = String(num).split("");
-    if (num < 20) {
+    if (num === 15) {
+        return `fifteen`;
+    } else if (num === 18) {
+        return `eighteen`;
+    } else if (num < 20) {
         return `${numOneToThirteen(Number(arr[1]))}teen`;
     } else if (num >= 20) {
         for (let i in numbers) {
@@ -57,11 +61,14 @@ const hundreds = (num) => {
         twoLastDig = Number(arr.splice(-2).join(""));
     if (arr[1] === 0 && arr[2] === 0) {
         return `${numOneToThirteen(arr[0])} hundred`;
-    } else {
+    } else if (twoLastDig <= 13) {
+        return `${numOneToThirteen(arr[0])} hundred ${numOneToThirteen(
+            twoLastDig
+        )}`;
+    } else
         return `${numOneToThirteen(arr[0])} hundred ${fourteenToNinetyNine(
             twoLastDig
         )}`;
-    }
 };
 
 const toReadable = (number) => {
@@ -74,4 +81,4 @@ const toReadable = (number) => {
     }
 };
 
-console.log(toReadable(999));
+console.log(toReadable(914));
